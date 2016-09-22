@@ -1,8 +1,37 @@
 
+extern crate rayon;
+
 mod logic;
 mod prng;
 
 use logic::*;
+
+use rayon::prelude::*;
+fn solve_all_stacks_par(ss : &mut Vec<SliceStack>) {
+    ss.par_iter_mut()
+        .for_each(|s| solve_stack(s));
+}
+
+fn solve_all_stacks(ss : &mut Vec<SliceStack>) {
+    for s in &mut ss[..] {
+        solve_stack(s);
+    }
+}
+
+fn solve_stack(s : &mut SliceStack) {
+    let mut direction : i32;
+    let mut search_dir : i32 = 0;
+    while !ss_iscomplete_unsafe(s) {
+        direction = 0;
+        let mut index = ss_find_single_joining_move2(s, &mut direction);
+        if index == -1 { index = ss_find_first_double_move(s, search_dir, &mut direction); }
+        //assert!(index != -1);
+        index += direction;
+        //ss_flip_rsslice(s, index, direction);
+        ss_flip(s, index, direction);
+        //search_dir = !search_dir;
+    }
+}
 
 fn main() {
     const SLICE_COUNT : i32 = MAX_SLICES as i32;
@@ -18,21 +47,5 @@ fn main() {
         ss_init_unsafe(s, SLICE_COUNT, COLOR_COUNT);
     }
 
-    let mut iters : usize = 0;
-    for s in &mut ss[..] {
-        while !ss_iscomplete_unsafe(s) {
-            iters += 1;
-
-            direction = 0;
-            let mut index = ss_find_single_joining_move2(s, &mut direction);
-            if index == -1 { index = ss_find_first_double_move(s, search_dir, &mut direction); }
-            //assert!(index != -1);
-            index += direction;
-            //ss_flip_rsslice(s, index, direction);
-            ss_flip(s, index, direction);
-            //search_dir = !search_dir;
-        }
-    }
-
-    println!("total iterations: {}", iters);
+    solve_all_stacks_par(&mut ss);
 }

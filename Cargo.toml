@@ -8,6 +8,7 @@ authors = ["Erik Beran <eberan@gmail.com>"]
 #crate-type = ["staticlib"]
 
 [dependencies]
+rayon = "0.4.2"
 
 [profile.release]
 lto = true
