@@ -23,7 +23,7 @@ fn solve_stack(s : &mut SliceStack) {
     let mut search_dir : i32 = 0;
     while !ss_iscomplete_unsafe(s) {
         direction = 0;
-        let mut index = ss_find_single_joining_move2(s, &mut direction);
+        let mut index = ss_find_single_joining_move(s, &mut direction);
         if index == -1 { index = ss_find_first_double_move(s, search_dir, &mut direction); }
         //assert!(index != -1);
         index += direction;
@@ -47,5 +47,8 @@ fn main() {
         ss_init_unsafe(s, SLICE_COUNT, COLOR_COUNT);
     }
 
-    solve_all_stacks_par(&mut ss);
+    //solve_all_stacks_par(&mut ss);
+    solve_all_stacks(&mut ss);
 }
+
+/* vim: set ts=4 sts=4 sw=4 et : */

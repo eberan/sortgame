@@ -24,3 +24,4 @@ pub fn prng_galois_lsfw_int_minmax(ctx : &mut PrngCtxGaloisLsfw, min : i32,
     return ((f * frange + 0.5) as i32) + min;
 }
 
+/* vim: set ts=4 sts=4 sw=4 et : */

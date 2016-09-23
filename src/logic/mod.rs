@@ -225,7 +225,7 @@ pub fn ss_find_single_joining_move(ss : &SliceStack, dir : &mut i32)
     return -1;
 }
 
-pub fn ss_find_single_joining_move_unsafe(ss : &SliceStack, dir : &mut i32)
+pub fn ss_find_single_joining_move_unchecked(ss : &SliceStack, dir : &mut i32)
     -> i32 {
     let mut found_diff_type : bool;
     let mut i : i32;
@@ -272,7 +272,7 @@ pub fn ss_find_single_joining_move_unsafe(ss : &SliceStack, dir : &mut i32)
 
 // Success: Valid index and direction
 // Failure: -1 (Cannot find valid move)
-pub fn ss_find_single_joining_move2(ss : &SliceStack, dir : &mut i32)
+pub fn ss_find_single_joining_move_rawptr(ss : &SliceStack, dir : &mut i32)
     -> i32 {
     let mut last_index : isize = 0;
     let mut i : isize;
