@@ -312,14 +312,14 @@ RunTests() {
     int const ss_count = 1024*1024;
     size_t const ss_size = sizeof(struct SliceStack) * ss_count;
     struct SliceStack* ss = (struct SliceStack*)malloc(ss_size);
-    int *initial_frag = (int*)malloc(ss_count*sizeof(int));
+    //int *initial_frag = (int*)malloc(ss_count*sizeof(int));
     int *moves_to_solve = (int*)malloc(ss_count*sizeof(int));
     memset(ss, 0, ss_size);
     memset(moves_to_solve, 0, ss_count*sizeof(int));
 
     for (i = 0; i < ss_count; ++i) {
         SliceStack_Create(ss+i, slice_count, color_count);
-        initial_frag[i] = SliceStack_Fragmentation(ss+i);
+        //initial_frag[i] = SliceStack_Fragmentation(ss+i);
         /*int const c1 = SliceStack_IsComplete(ss+i);
         int const c2 = SliceStack_IsComplete2(ss+i);
         if (c1 != c2) { printf("%d != %d:%d\n", c1, c2, SliceStack_Fragmentation(ss+i)); }*/
@@ -351,15 +351,15 @@ RunTests() {
 
     printf("finished big solve\n");
 
-    for (i = 0; i < ss_count; ++i) {
-        if (initial_frag[i] * 2 < moves_to_solve[i]) {
-            printf("init frag : %d moves : %d\n", initial_frag[i], moves_to_solve[i]);
-        }
-    }
+    //for (i = 0; i < ss_count; ++i) {
+    //    if (initial_frag[i] * 2 < moves_to_solve[i]) {
+    //        printf("init frag : %d moves : %d\n", initial_frag[i], moves_to_solve[i]);
+    //    }
+    //}
 
     free(ss);
     free(moves_to_solve);
-    free(initial_frag);
+    //free(initial_frag);
 
     printf("big solve done\n");
 }
